@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="IjWzlZ9Wbdfja7lQ8sRfYE">
+<head data-page-node-id="uBoYJuBVauOPBoxu0SxXtm">
+<meta charset="UTF-8" data-page-node-id="2zWjq5mfjGwiliWyUi8HDt">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" data-page-node-id="k25tiHdGqX7p4qo6NtqWeB">
+<meta name="format-detection" content="telephone=no" data-page-node-id="4550BulDKvUQNB5v1ELBBH">
+<title>“劳”有所依｜超龄劳动者 AI 法律援助助手</title>
+<style>
+:root{
+  --paper:#F6F3EC;
+  --card:#FFFFFF;
+  --ink:#1B2733;
+  --muted:#5C6874;
+  --line:#E3DED3;
+  --blue:#174A73;
+  --blue-soft:#E8F0F6;
+  --orange:#C9632B;
+  --orange-soft:#FBEDE3;
+  --green:#256B4E;
+  --green-soft:#E7F2EC;
+  --red:#A3382F;
+  --radius:16px;
+  --shadow:0 2px 14px rgba(27,39,51,.08);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{font-size:18px;}
+body{
+  margin:0;
+  background:#DED9CE;
+  color:var(--ink);
+  font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  line-height:1.6;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  min-height:100vh;
+}
+#phone{
+  width:100%;
+  max-width:430px;
+  min-height:100vh;
+  background:var(--paper);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+@media(min-width:520px){
+  #phone{
+    height:812px;
+    min-height:812px;
+    margin:24px 0;
+    border-radius:26px;
+    box-shadow:0 12px 40px rgba(27,39,51,.22);
+  }
+}
+#statusbar{
+  height:30px;
+  flex:0 0 30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  font-size:.66rem;
+  color:var(--muted);
+  background:var(--paper);
+}
+.sb-icons{display:flex;gap:5px;align-items:center;}
+.sb-bar{width:3px;background:var(--muted);border-radius:2px;}
+.sb-bat{width:20px;height:10px;border:1.5px solid var(--muted);border-radius:3px;position:relative;}
+.sb-bat:after{content:"";position:absolute;left:1.5px;top:1.5px;bottom:1.5px;right:5px;background:var(--muted);border-radius:1px;}
+#topbar{
+  flex:0 0 auto;
+  min-height:3.4rem;
+  padding:.5rem .9rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  border-bottom:1px solid var(--line);
+  background:var(--paper);
+}
+.tb-back{
+  border:none;
+  background:var(--card);
+  color:var(--blue);
+  font-size:.9rem;
+  font-weight:700;
+  padding:.45rem .7rem;
+  border-radius:12px;
+  min-height:2.6rem;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+}
+.tb-title{font-size:1rem;font-weight:700;flex:1;line-height:1.3;}
+.tb-tools{display:flex;gap:.35rem;}
+.tool{
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--blue);
+  font-size:.8rem;
+  font-weight:700;
+  min-width:2.6rem;
+  min-height:2.6rem;
+  border-radius:12px;
+  cursor:pointer;
+}
+.tool.on{background:var(--blue);color:#fff;border-color:var(--blue);}
+#view{
+  flex:1 1 auto;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:1rem .9rem 5.6rem;
+}
+#tabbar{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:4.5rem;
+  background:var(--card);
+  border-top:1px solid var(--line);
+  display:flex;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.tab{
+  flex:1;
+  border:none;
+  background:none;
+  color:var(--muted);
+  font-size:.76rem;
+  font-weight:700;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:.15rem;
+  cursor:pointer;
+}
+.tab i{font-style:normal;font-size:1.15rem;line-height:1;}
+.tab.active{color:var(--blue);}
+#toast{
+  position:absolute;
+  left:50%;bottom:5.4rem;
+  transform:translateX(-50%) translateY(12px);
+  background:rgba(27,39,51,.94);
+  color:#fff;
+  padding:.7rem 1rem;
+  border-radius:14px;
+  font-size:.82rem;
+  max-width:86%;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .22s,transform .22s;
+  z-index:20;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.h1{font-size:1.5rem;font-weight:800;line-height:1.35;margin:.2rem 0 .6rem;}
+.h2{font-size:1.15rem;font-weight:800;margin:0 0 .5rem;}
+.p{font-size:.92rem;color:var(--muted);margin:.2rem 0 .9rem;}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1rem;
+  box-shadow:var(--shadow);
+  margin-bottom:.8rem;
+}
+.bigbtn{
+  width:100%;
+  border:none;
+  background:var(--blue);
+  color:#fff;
+  font-size:1.06rem;
+  font-weight:800;
+  min-height:3.6rem;
+  border-radius:var(--radius);
+  margin-bottom:.7rem;
+  cursor:pointer;
+  text-align:left;
+  padding:.8rem 1rem;
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+}
+.bigbtn .bi{
+  width:2.5rem;height:2.5rem;flex:0 0 2.5rem;
+  background:rgba(255,255,255,.18);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+}
+.bigbtn .bt{display:flex;flex-direction:column;line-height:1.35;}
+.bigbtn .bs{font-size:.76rem;font-weight:400;opacity:.85;}
+.bigbtn.alt{background:var(--orange);}
+.bigbtn.ghost{background:var(--card);color:var(--blue);border:1.5px solid var(--blue);}
+.btnrow{display:flex;gap:.6rem;}
+.btnrow>*{flex:1;}
+.btn{
+  border:1.5px solid var(--line);
+  background:var(--card);
+  color:var(--ink);
+  font-size:.95rem;
+  font-weight:700;
+  min-height:3.2rem;
+  border-radius:14px;
+  cursor:pointer;
+  padding:.6rem .8rem;
+}
+.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue);}
+.btn.warm{background:var(--orange);color:#fff;border-color:var(--orange);}
+.btn:disabled{opacity:.5;cursor:default;}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap;margin:.5rem 0 .9rem;}
+.chip{
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--muted);
+  border-radius:999px;
+  padding:.35rem .8rem;
+  font-size:.8rem;
+  cursor:pointer;
+}
+.chip.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+.note{
+  font-size:.78rem;
+  color:var(--muted);
+  background:#F0ECE3;
+  border-left:4px solid var(--orange);
+  padding:.6rem .7rem;
+  border-radius:0 10px 10px 0;
+  margin:.7rem 0;
+}
+.note.blue{background:var(--blue-soft);border-left-color:var(--blue);}
+.note.green{background:var(--green-soft);border-left-color:var(--green);}
+.tag{
+  display:inline-block;
+  font-size:.72rem;
+  font-weight:700;
+  padding:.15rem .5rem;
+  border-radius:8px;
+  background:var(--blue-soft);
+  color:var(--blue);
+  margin-right:.3rem;
+}
+.tag.warn{background:var(--orange-soft);color:var(--orange);}
+.tag.ok{background:var(--green-soft);color:var(--green);}
+.qnum{font-size:.8rem;color:var(--blue);font-weight:800;letter-spacing:.05em;}
+.opt{
+  width:100%;
+  text-align:left;
+  border:1.5px solid var(--line);
+  background:var(--card);
+  color:var(--ink);
+  font-size:1rem;
+  min-height:3.5rem;
+  border-radius:14px;
+  padding:.7rem 1rem;
+  margin-bottom:.6rem;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+}
+.opt:before{
+  content:"";
+  width:1.15rem;height:1.15rem;
+  border:2px solid #B9C2CB;
+  border-radius:50%;
+  flex:0 0 1.15rem;
+}
+.opt.sel{border-color:var(--blue);background:var(--blue-soft);font-weight:700;}
+.opt.sel:before{border-color:var(--blue);background:var(--blue);box-shadow:inset 0 0 0 3px var(--blue-soft);}
+.verdict{
+  font-size:1.22rem;
+  font-weight:800;
+  line-height:1.5;
+  background:var(--blue);
+  color:#fff;
+  border-radius:var(--radius);
+  padding:1rem;
+  margin:.4rem 0 .8rem;
+}
+.layer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.6rem;
+  width:100%;
+  border:1px solid var(--line);
+  background:var(--card);
+  border-radius:14px;
+  padding:.85rem 1rem;
+  margin-bottom:.55rem;
+  font-size:1rem;
+  font-weight:700;
+  color:var(--ink);
+  cursor:pointer;
+  min-height:3.4rem;
+}
+.layer span.ar{color:var(--blue);font-size:1.2rem;}
+.lawitem{border-bottom:1px dashed var(--line);padding:.7rem 0;}
+.lawitem:last-child{border-bottom:none;}
+.lawname{font-weight:800;font-size:.95rem;}
+.lawdate{font-size:.74rem;color:var(--muted);margin:.15rem 0 .4rem;}
+.lawplain{font-size:.9rem;}
+.ck{
+  display:flex;
+  align-items:flex-start;
+  gap:.6rem;
+  padding:.5rem 0;
+  font-size:.92rem;
+}
+.ck input{
+  width:1.25rem;height:1.25rem;flex:0 0 1.25rem;
+  accent-color:var(--blue);margin-top:.15rem;
+}
+.ck.done{color:var(--muted);text-decoration:line-through;}
+.step{border-left:3px solid var(--blue);padding:.1rem 0 .8rem .9rem;margin-left:.4rem;}
+.step:last-child{border-left-color:transparent;}
+.step b{display:block;font-size:.98rem;}
+.step span{font-size:.84rem;color:var(--muted);}
+details{
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--card);
+  padding:.7rem .9rem;
+  margin:.8rem 0;
+}
+summary{
+  font-weight:800;
+  cursor:pointer;
+  font-size:.95rem;
+  min-height:2.4rem;
+  display:flex;
+  align-items:center;
+}
+.calcline{
+  display:flex;
+  justify-content:space-between;
+  gap:.8rem;
+  border-bottom:1px dashed var(--line);
+  padding:.5rem 0;
+  font-size:.85rem;
+}
+.calcline:last-child{border-bottom:none;}
+.calcline .cl-n{flex:1;}
+.calcline .cl-f{display:block;font-size:.72rem;color:var(--muted);}
+.calcline .cl-v{font-weight:800;white-space:nowrap;}
+.field{margin-bottom:.8rem;}
+.field label{display:block;font-size:.86rem;font-weight:700;margin-bottom:.3rem;}
+.field input,.field select{
+  width:100%;
+  font-size:1rem;
+  min-height:3rem;
+  border:1.5px solid var(--line);
+  border-radius:12px;
+  padding:.5rem .7rem;
+  background:var(--card);
+  color:var(--ink);
+  font-family:inherit;
+}
+.result-money{
+  font-size:1.4rem;
+  font-weight:800;
+  color:var(--orange);
+  text-align:center;
+  padding:.6rem 0;
+}
+.seg{display:flex;gap:.5rem;margin:.6rem 0 1rem;}
+.seg button{
+  flex:1;
+  border:1.5px solid var(--line);
+  background:var(--card);
+  border-radius:12px;
+  padding:.6rem .4rem;
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--ink);
+  cursor:pointer;
+  min-height:3rem;
+}
+.seg button.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+.slide{
+  min-height:24rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:1rem;
+}
+.slide .mark{
+  width:5rem;height:5rem;border-radius:20px;
+  background:var(--blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.4rem;font-weight:800;margin-bottom:1.2rem;
+}
+.dots{display:flex;gap:.4rem;margin:1.2rem 0;}
+.dot{width:.5rem;height:.5rem;border-radius:50%;background:#C9C4B9;}
+.dot.on{background:var(--blue);width:1.2rem;border-radius:999px;}
+.ethnic{
+  font-family:"Microsoft YaHei","PingFang SC","Microsoft Yi Baiti","Nuosu SIL","Microsoft Himalaya",sans-serif;
+}
+.doctext{
+  white-space:pre-wrap;
+  font-size:.9rem;
+  line-height:1.8;
+  color:var(--ink);
+  max-height:60vh;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+@media print{#tabbar,#topbar{display:none;}}
+</style>
+</head>
+<body data-page-node-id="5C2WkZoVOEZHqWALWbC8uR">
+<div id="phone" data-page-node-id="RHNtrblQIMDjbUMoXzKiKZ">
+  <div id="statusbar" data-page-node-id="NQb9uZZtRgRO69ypGOgj2C">
+    <span data-page-node-id="5mjQDh8EnsRkgr8DJLeK3K">9:41</span>
+    <span class="sb-icons" data-page-node-id="rRPTAl6jxJHyriNIcD5u2l">
+      <span class="sb-bar" style="height:5px" data-page-node-id="rahKSAt0cjSaa3GGoBNFFx"></span>
+      <span class="sb-bar" style="height:8px" data-page-node-id="kYWXDu5tjueNgIfZ62xj98"></span>
+      <span class="sb-bar" style="height:11px" data-page-node-id="JSSWL3LovumKSQmoAlJks5"></span>
+      <span class="sb-bat" data-page-node-id="QlOndRSvK2ydcNlHEgZkH5"></span>
+    </span>
+  </div>
+  <header id="topbar" data-page-node-id="HxjDgkFYLCIES09yOA1QsP"></header>
+  <main id="view" data-page-node-id="D6T1rI29x044MiMY7LeSAF"></main>
+  <nav id="tabbar" data-page-node-id="Mlxtx0U3aiSGa3BZUIhn8r"></nav>
+  <div id="toast" data-page-node-id="wiEzwIJwtfTfjf1W5TKEQY"></div>
+</div>
+<script>
+/* ============================================================
+   一、金额参数可配置表（以成都现行标准校准）
+   正式使用前请按成都市最新公布标准替换下列演示数值。
+   ============================================================ */
+var CONFIG = {
+  calibration: '以成都现行标准校准',
+  laborService: {
+    foodDaily: 60,
+    nutritionDaily: 40,
+    trafficLump: 600,
+    nursingDaily: 130,
+    lostWageDaily: 170,
+    disabilityBase: 42000,
+    // 演示简化值。法定口径＝受诉法院地上一年度城镇居民人均可支配收入 × 20 年 × 伤残系数，正式使用须替换。
+    gradeRatio: { '七级':0.4, '八级':0.3, '九级':0.2, '十级':0.1 },
+    faultShare: [0.3, 0.7]
+  },
+  workInjury: {
+    foodDaily: 60,
+    nursingDaily: 130,
+    gradeMonths: { '七级':13, '八级':11, '九级':9, '十级':7 },
+    // 以下月数为演示值，以四川省 / 成都市现行标准校准，正式使用须替换。
+    medicalSubsidyMonths: { '七级':10, '八级':8, '九级':6, '十级':4 },
+    jobSubsidyMonths: { '七级':20, '八级':16, '九级':12, '十级':8 }
+  },
+  wageAddOn: [0.5, 1]
+};
+
+/* ============================================================
+   二、文案表
+   本原型为汉语演示版本。彝语、藏语对照为后续规划，
+   待团队成员逐条真人核对后再行回填，当前不提供民族文字界面。
+   法条名称、证据清单、文书全文一律使用汉语。
+   ============================================================ */
+var I18N = {
+  zh: {
+    back:'返回',
+    ob1t:'您好，我是劳有所依',
+    ob1d:'专为退休后还在干活的人做的法律助手。字大、好点、能读给您听。',
+    ob2t:'说清三件事就行',
+    ob2d:'遇到啥事、领没领养老金、有没有合同——我们帮您理清能怎么办。',
+    ob3t:'先看演示，不收费',
+    ob3d:'本原型全部为演示数据，不会发送任何信息，也不会真实拨打电话。',
+    startUse:'开始使用', skip:'跳过', next:'下一步', prev:'上一步',
+    homeHello:'您今天想办什么？',
+    startCheck:'开始自查', startCheckSub:'3 分钟弄清能怎么办',
+    demoCase:'看演示案例', demoCaseSub:'三个常见场景，一键查看结果',
+    calcEntry:'算一算赔偿', calcEntrySub:'输入数字，看看能主张多少',
+    helpEntry:'我要找人帮忙', helpEntrySub:'12348 公共法律服务热线',
+    homeFoot:'演示原型 · 所有数据仅在本机，不会上传',
+    bilingualNote:'本原型为汉语演示版本，法律结论以汉语为准',
+    typeTitle:'您遇到了什么事？',
+    typeTip:'选一个最接近的，说不清也没关系',
+    choose:'选这个',
+    quizTitle:'再问您几个小事',
+    quizTip:'都是选择题，点一下就行',
+    seeResult:'看看我的结果',
+    resultTitle:'您的情况，初步看是',
+    verdictLabel:'情形定性',
+    relationLabel:'关系判断',
+    layerLaw:'法律依据怎么说',
+    layerEvidence:'要准备哪些证据',
+    layerPath:'下一步怎么走',
+    layerCalc:'算一算能赔多少',
+    lawTitle:'相关法条（白话版）',
+    evidenceTitle:'证据清单（准备好一项就勾一项）',
+    pathTitle:'建议路径',
+    mustLabel:'一定要有', supportLabel:'尽量找到', altLabel:'没有书面合同也能替代',
+    backHome:'回首页',
+    docTitle:'文书生成（演示）',
+    docTip:'根据您的诊断结果自动套用模板，带 ____ 的空白处请自行填写',
+    docBtn:'生成文书（演示）',
+    docTplLabel:'已选模板',
+    docCopy:'复制全文',
+    docDownload:'下载 txt',
+    docCopied:'已复制到剪贴板',
+    docCopyFail:'自动复制不可用，请长按文本手动选择复制',
+    docSaved:'已开始下载 txt 文件（保存在浏览器下载目录）',
+    docNoReason1:'需先确认是否已领取养老金，才能选择对应模板。请到「办事」重新自查，或拨打 12348 咨询。',
+    docNoReason2:'该情形本版暂未配置对应文书模板，可拨打 12348 咨询。',
+    docNoReason3:'该情形本版暂未配置模板，可拨打 12348 咨询。',
+    docDocEnd:'本文书为演示模板，非正式法律文书，正式提交前请咨询 12348 或执业律师。',
+    calcTitle:'赔偿测算（演示）',
+    calcTip:'按两种用工关系分别计算，结果仅供参考',
+    relLabor:'已领养老金 · 劳务关系',
+    relWork:'未领养老金 · 劳动关系',
+    modeWage:'工资没发', modeInjury:'干活受伤',
+    calcBtn:'开始测算',
+    calcRange:'测算区间',
+    calcDetail:'查看逐行计算过程',
+    again:'重新测算',
+    calcRuleNote:'已领养老金按《民法典》第1192条过错分担、第1179条赔偿项目；未领养老金按《工伤保险条例》待遇项目。',
+    helpTitle:'找人帮您',
+    help12348:'12348 公共法律服务热线',
+    noDial:'演示原型，不实际拨号',
+    helpTip:'真实求助请拨打当地 12348，或到社区司法所、工会法律服务站。',
+    mineTitle:'设置与说明',
+    fontLabel:'字体大小', font1:'标准', font2:'大', font3:'特大',
+    demoLabel:'演示案例',
+    disclaimerLabel:'重要说明',
+    about:'关于本原型',
+    aboutText:'本作品为大学生创新创业训练计划答辩演示原型。全部法条、证据、路径与金额均为本地演示数据，不构成正式法律意见。'
+  }
+};
+
+/* ============================================================
+   三、本地演示知识库与案例（全部写死，不调用任何接口）
+   ============================================================ */
+var ISSUE_TYPES = [
+  {id:'wage', label:'工资没发 / 没发够', mark:'薪', desc:'干了活，工钱没给或没给够'},
+  {id:'injury', label:'干活受伤 / 摔伤', mark:'伤', desc:'工作中受伤、摔伤、骨折'},
+  {id:'contract', label:'没签合同', mark:'约', desc:'只有口头约定，没有书面协议'},
+  {id:'dismiss', label:'被辞退 / 不让干了', mark:'止', desc:'突然被叫走，不让继续干'},
+  {id:'overtime', label:'加班费没给', mark:'时', desc:'加班多，但没有加班费'},
+  {id:'other', label:'其他问题', mark:'他', desc:'先说说你的情况'}
+];
+
+var QUESTIONS = [
+  {id:'age', q:'您开始干这份活时，大概多大年纪？', opts:['50—59岁','60—69岁','70岁以上']},
+  {id:'pension', q:'您已经在领养老金或退休金了吗？', opts:['已经领了','还没领','不清楚']},
+  {id:'contract', q:'有没有签书面的合同或协议？', opts:['有书面合同','没有，只是口头说','记不清了']},
+  {id:'insurance', q:'用工方给您交过工伤保险吗？', opts:['交过','没交','不知道']},
+  {id:'duration', q:'这件事发生多久了？', opts:['1个月内','1个月到1年','超过1年']}
+];
+
+var VERDICT_TEXT = {
+  wage:    {'劳务':'已领养老待遇 · 口头用工 · 劳务报酬被拖欠','劳动':'未领养老待遇 · 用工报酬被拖欠','待核':'用工关系待核实 · 工钱被拖欠'},
+  injury:  {'劳务':'已领养老待遇 · 干活时摔伤 · 按人身损害主张','劳动':'未领养老待遇 · 干活时受伤 · 可按工伤主张','待核':'用工关系待核实 · 干活时受伤'},
+  contract:{'劳务':'已领养老待遇 · 只有口头约定 · 权益仍受保护','劳动':'未领养老待遇 · 缺少书面合同 · 可先确认关系','待核':'没有书面合同 · 用工关系待核实'},
+  dismiss: {'劳务':'已领养老待遇 · 用工被中止 · 可主张已完成部分报酬','劳动':'未领养老待遇 · 被停止用工 · 可主张相应补偿','待核':'用工被中止 · 关系待核实'},
+  overtime:{'劳务':'已领养老待遇 · 加班费争议 · 按约定主张','劳动':'未领养老待遇 · 加班费争议 · 按工时记录主张','待核':'加班费争议 · 用工关系待核实'},
+  other:   {'劳务':'已领养老待遇 · 超龄用工 · 可主张基本权益','劳动':'未领养老待遇 · 超龄用工 · 可按劳动关系主张','待核':'超龄用工 · 关系待核实'}
+};
+Object.keys(VERDICT_TEXT).forEach(function(tp){
+  Object.keys(VERDICT_TEXT[tp]).forEach(function(rl){
+    I18N.zh['verdict_' + tp + '_' + rl] = VERDICT_TEXT[tp][rl];
+  });
+});
+
+var DEMO_CASES = [
+  {
+    id:'A', title:'案例一 · 已领退休金的欠薪',
+    type:'wage',
+    answers:{age:'60—69岁',pension:'已经领了',contract:'没有，只是口头说',insurance:'没交',duration:'1个月到1年'},
+    calc:{mode:'wage',relation:'劳务',wage:3200,arrearsMonths:6,medical:0,days:0,months:0,nurse:0,grade:'未鉴定'}
+  },
+  {
+    id:'B', title:'案例二 · 未领退休金的工伤',
+    type:'injury',
+    answers:{age:'60—69岁',pension:'还没领',contract:'有书面合同',insurance:'交过',duration:'1个月内'},
+    calc:{mode:'injury',relation:'劳动',wage:5000,arrearsMonths:0,medical:8000,days:0,months:3,nurse:15,grade:'未鉴定'}
+  },
+  {
+    id:'C', title:'案例三 · 无书面合同的保洁摔伤',
+    type:'injury',
+    answers:{age:'70岁以上',pension:'已经领了',contract:'没有，只是口头说',insurance:'没交',duration:'1个月内'},
+    calc:{mode:'injury',relation:'劳务',wage:0,arrearsMonths:0,medical:5000,days:20,months:0,nurse:10,grade:'十级'}
+  }
+];
+
+var DISCLAIMER = '本测算未计入伤残等级鉴定结论、医疗费实际票据金额与过错比例认定，实际金额以劳动能力鉴定结论和裁判结果为准。';
+
+/* ============================================================
+   四、运行状态
+   ============================================================ */
+var APP = {
+  screen:'onboard',
+  slide:0,
+  lang:'zh',
+  fontLevel:1,
+  voice:false,
+  answers:{},
+  qIndex:0,
+  typeDetail:null,
+  stack:[],
+  checked:{},
+  calc:{mode:'injury',relation:'劳务',wage:0,arrearsMonths:0,medical:0,days:0,months:0,nurse:0,grade:'未鉴定'},
+  calcResult:null,
+  currentCase:null,
+  toastTimer:null
+};
+
+function t(key, vars){
+  var dict = I18N[APP.lang] || I18N.zh;
+  var value = dict[key] || I18N.zh[key] || '';
+  if(vars){
+    Object.keys(vars).forEach(function(k){
+      value = value.split('{' + k + '}').join(vars[k]);
+    });
+  }
+  return value;
+}
+function esc(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function money(n){
+  n = Math.round(n);
+  return n.toLocaleString('zh-CN');
+}
+function num(v){
+  var n = parseFloat(v);
+  return isNaN(n) || n < 0 ? 0 : n;
+}
+function toast(msg){
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(APP.toastTimer);
+  APP.toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2600);
+}
+function applyFont(){
+  document.documentElement.style.fontSize = (18 * APP.fontLevel) + 'px';
+}
+function go(screen, push){
+  if(push !== false && APP.screen !== screen){
+    APP.stack.push(APP.screen);
+  }
+  APP.screen = screen;
+  render();
+  document.getElementById('view').scrollTop = 0;
+}
+function back(){
+  var prev = APP.stack.pop();
+  if(!prev){ APP.screen = 'home'; }
+  else { APP.screen = prev; }
+  render();
+  document.getElementById('view').scrollTop = 0;
+}
+
+/* ============================================================
+   五、诊断规则：情形 — 法条 — 证据 — 路径
+   ============================================================ */
+function relationOf(pension){
+  if(pension === '已经领了') return '劳务';
+  if(pension === '还没领') return '劳动';
+  return '待核';
+}
+function getLaw(relation, type){
+  var list = [];
+  if(relation === '劳务'){
+    if(type === 'wage' || type === 'overtime'){
+      list.push({
+        name:'《中华人民共和国民法典》第五百零九条',
+        date:'2021年1月1日施行',
+        plain:'按约定把活干完，对方就应按约定付钱。口头约定也算数，关键是把它证明出来。'
+      });
+    } else {
+      list.push({
+        name:'《中华人民共和国民法典》第一千一百九十二条',
+        date:'2021年1月1日施行',
+        plain:'提供劳务一方因劳务受到损害的，根据双方各自的过错承担相应责任。'
+      });
+      list.push({
+        name:'《中华人民共和国民法典》第一千一百七十九条',
+        date:'2021年1月1日施行',
+        plain:'人身损害赔偿包括医疗费、误工费、护理费、交通费、住院伙食补助费等。'
+      });
+    }
+    list.push({
+      name:'《超龄劳动者基本权益保障暂行规定》',
+      date:'2026年7月1日施行',
+      plain:'超龄劳动者的劳动报酬、休息休假、劳动安全等基本权益受保护。'
+    });
+  } else if(relation === '劳动'){
+    if(type === 'injury'){
+      list.push({
+        name:'《工伤保险条例》第十四条',
+        date:'2011年1月1日施行',
+        plain:'在工作时间和工作场所内，因工作原因受到事故伤害的，应当认定为工伤。'
+      });
+      list.push({
+        name:'《工伤保险条例》第三十五条至第三十七条',
+        date:'2011年1月1日施行',
+        plain:'工伤后可享停工留薪期工资、一次性伤残补助金等待遇。'
+      });
+    } else {
+      list.push({
+        name:'《中华人民共和国劳动合同法》第十条',
+        date:'2013年7月1日施行',
+        plain:'建立劳动关系应当订立书面劳动合同，工资应当按时足额支付。'
+      });
+      list.push({
+        name:'《中华人民共和国劳动合同法》第八十五条',
+        date:'2013年7月1日施行',
+        plain:'用工方被责令限期支付后仍不支付拖欠工资的，可按应付金额的50%以上100%以下加付赔偿金。对应测算中的“加付赔偿金”一项。'
+      });
+    }
+    list.push({
+      name:'《最高人民法院关于审理劳动争议案件适用法律问题的解释（二）》',
+      date:'2025年9月1日施行',
+      plain:'超龄用工关系认定与争议处理规则进一步明确，救济渠道更清晰。'
+    });
+  } else {
+    list.push({
+      name:'《超龄劳动者基本权益保障暂行规定》',
+      date:'2026年7月1日施行',
+      plain:'先核实是否领取养老待遇，再判断按劳务关系还是劳动关系主张权益。'
+    });
+    list.push({
+      name:'《中华人民共和国民法典》第一千一百九十二条',
+      date:'2021年1月1日施行',
+      plain:'若按劳务关系处理，受伤赔偿按双方过错分担。'
+    });
+    list.push({
+      name:'《工伤保险条例》第十四条',
+      date:'2011年1月1日施行',
+      plain:'若符合劳动关系要件且因工受伤，可申请工伤认定。'
+    });
+  }
+  return list;
+}
+function getEvidence(type, relation, contract){
+  var must = [], support = [], alt = [];
+  if(type === 'wage' || type === 'overtime' || type === 'dismiss'){
+    must = ['约定工资标准的聊天记录或语音','出勤、排班、派工记录','工作服、工牌、出入证','催要工钱的聊天记录'];
+    support = ['银行或微信转账记录','同事证言','用工方名称、地址、负责人电话'];
+  } else {
+    must = ['急诊病历、诊断证明、医疗费票据','事故现场照片或视频','用工方名称、地址、负责人电话','就医时间与受伤经过记录'];
+    support = ['工友证言及联系方式','报警记录或急救出车记录','派工单、微信群派工消息'];
+  }
+  if(contract !== '有书面合同'){
+    alt = ['微信或短信里约定干活、报酬的内容','工牌、工作服、考勤照片','派工群聊与定位打卡记录','同事书面证言'];
+  } else {
+    alt = ['书面合同中关于岗位与报酬的条款','合同签署过程的聊天或录音'];
+  }
+  return {must:must, support:support, alt:alt};
+}
+function getPath(relation, type){
+  if(relation === '劳务'){
+    return [
+      {t:'一、先把证据固定住', d:'把聊天记录、工牌、考勤、看病材料拍照保存，别删原始记录。', w:'地点：家里、手机上'},
+      {t:'二、协商并留下痕迹', d:'当面或用微信说清欠多少钱、什么时候给，尽量让对方文字回复。', w:'方式：微信、现场'},
+      {t:'三、申请人民调解', d:'到社区、街道司法所或工会申请调解，调解员会帮忙沟通。', w:'地点：社区司法所、工会'},
+      {t:'四、到法院起诉', d:'调解不成，可就劳务报酬或人身损害向用工所在地基层法院起诉。', w:'地点：基层人民法院'}
+    ];
+  }
+  if(relation === '劳动'){
+    return [
+      {t:'一、先去看病并保存票据', d:'到正规医院就诊，保留病历、诊断证明和全部票据。', w:'地点：正规医院'},
+      {t:'二、申请工伤认定', d:'用工方不申请时，本人或近亲属可在规定期限内自行申请。', w:'地点：当地人社部门'},
+      {t:'三、申请劳动能力鉴定', d:'伤情稳定后申请鉴定，鉴定结论决定待遇标准。', w:'地点：劳动能力鉴定委员会'},
+      {t:'四、主张待遇或申请仲裁', d:'协商不成，可就工伤待遇或欠薪申请劳动仲裁。', w:'地点：劳动人事争议仲裁院'}
+    ];
+  }
+  return [
+    {t:'一、先核实是否领养老金', d:'是否领取养老待遇，直接影响按哪种关系主张，先确认这一点。', w:'地点：社保经办窗口或手机查询'},
+    {t:'二、两条路径都准备材料', d:'同时准备劳务报酬证据与劳动关系证据，避免来回折腾。', w:'方式：手机、社区'},
+    {t:'三、先申请调解', d:'到社区司法所或工会申请人民调解，成本低、速度快。', w:'地点：社区司法所、工会'},
+    {t:'四、再选择仲裁或起诉', d:'按核实后的关系，选择劳动仲裁或法院起诉。', w:'地点：仲裁院或基层法院'}
+  ];
+}
+function diagnose(){
+  var a = APP.answers;
+  var type = a.type || 'other';
+  var relation = relationOf(a.pension);
+  return {
+    type: type,
+    relation: relation,
+    verdictKey: 'verdict_' + type + '_' + relation,
+    law: getLaw(relation, type),
+    evidence: getEvidence(type, relation, a.contract),
+    path: getPath(relation, type)
+  };
+}
+
+/* ============================================================
+   六、赔偿测算：两条公式
+   ============================================================ */
+function calcWage(v, relation){
+  var lines = [];
+  var principal = num(v.wage) * num(v.arrearsMonths);
+  lines.push({n:'拖欠工资本金', f:'月工资 ' + money(num(v.wage)) + ' 元 × ' + money(num(v.arrearsMonths)) + ' 个月', v:money(principal) + ' 元'});
+  var low = principal, high = principal;
+  if(relation === '劳动'){
+    var addLow = principal * CONFIG.wageAddOn[0];
+    var addHigh = principal * CONFIG.wageAddOn[1];
+    lines.push({n:'加付赔偿金（责令支付后仍不支付时）', f:'本金 × 50%—100%', v:money(addLow) + ' — ' + money(addHigh) + ' 元'});
+    low = principal + addLow;
+    high = principal + addHigh;
+  } else {
+    var lossHigh = principal * 0.05;
+    lines.push({n:'逾期资金占用损失（演示估算）', f:'本金 × 0%—5%', v:'0 — ' + money(lossHigh) + ' 元'});
+    high = principal + lossHigh;
+  }
+  return {low:low, high:high, lines:lines};
+}
+function calcInjuryService(v){
+  var c = CONFIG.laborService;
+  var lines = [];
+  var medical = num(v.medical);
+  var nurseDays = num(v.nurse);
+  var daily = num(v.wage) > 0 ? num(v.wage) / 21.75 : c.lostWageDaily;
+  var lost = num(v.days) * daily;
+  var nurse = nurseDays * c.nursingDaily;
+  var food = nurseDays * c.foodDaily;
+  var nutrition = nurseDays * c.nutritionDaily;
+  var disability = c.disabilityBase * (c.gradeRatio[v.grade] || 0);
+  var items = [
+    {n:'医疗费', f:'按演示输入金额', v:medical},
+    {n:'误工费', f:money(num(v.days)) + ' 天 × ' + money(daily) + ' 元/天', v:lost},
+    {n:'护理费', f:money(nurseDays) + ' 天 × ' + c.nursingDaily + ' 元/天', v:nurse},
+    {n:'住院伙食补助费', f:money(nurseDays) + ' 天 × ' + c.foodDaily + ' 元/天', v:food},
+    {n:'营养费', f:money(nurseDays) + ' 天 × ' + c.nutritionDaily + ' 元/天', v:nutrition},
+    {n:'交通费', f:'演示定额', v:c.trafficLump},
+    {n:'残疾赔偿金（按伤残等级折算）', f:'演示简化值 ' + money(c.disabilityBase) + ' 元 × ' + Math.round((c.gradeRatio[v.grade] || 0) * 100) + '%；法定口径＝受诉法院地上一年度城镇居民人均可支配收入 × 20 年 × 伤残系数', v:disability}
+  ];
+  items.forEach(function(it){
+    lines.push({n:it.n, f:it.f, v:money(it.v) + ' 元'});
+  });
+  var subtotal = items.reduce(function(s, it){ return s + it.v; }, 0);
+  lines.push({n:'小计（民法典第1179条项目合计）', f:'以上各项相加', v:money(subtotal) + ' 元'});
+  var low = subtotal * c.faultShare[0];
+  var high = subtotal * c.faultShare[1];
+  lines.push({
+    n:'过错分担（民法典第1192条）',
+    f:'用工方承担 ' + Math.round(c.faultShare[0] * 100) + '%—' + Math.round(c.faultShare[1] * 100) + '%',
+    v:money(low) + ' — ' + money(high) + ' 元'
+  });
+  return {low:low, high:high, lines:lines};
+}
+function calcInjuryWork(v){
+  var c = CONFIG.workInjury;
+  var lines = [];
+  var medical = num(v.medical);
+  var wage = num(v.wage);
+  var stopMonths = num(v.months);
+  var nurseDays = num(v.nurse);
+  var grades = v.grade === '未鉴定' ? ['十级','七级'] : [v.grade, v.grade];
+  function one(g){
+    return {
+      a1: wage * c.gradeMonths[g],
+      a2: wage * c.medicalSubsidyMonths[g],
+      a3: wage * c.jobSubsidyMonths[g],
+      stopPay: wage * stopMonths,
+      nurse: nurseDays * c.nursingDaily,
+      food: nurseDays * c.foodDaily
+    };
+  }
+  var lo = one(grades[0]), hi = one(grades[1]);
+  function range(a, b){
+    return Math.abs(a - b) < 1 ? money(a) : money(a) + ' — ' + money(b);
+  }
+  lines.push({n:'医疗费（符合目录部分）', f:'按演示输入金额', v:money(medical) + ' 元'});
+  lines.push({n:'停工留薪期工资', f:money(stopMonths) + ' 个月 × ' + money(wage) + ' 元/月', v:money(lo.stopPay) + ' 元'});
+  lines.push({n:'一次性伤残补助金', f:grades[0] + ' ' + c.gradeMonths[grades[0]] + ' 个月 / ' + grades[1] + ' ' + c.gradeMonths[grades[1]] + ' 个月', v:range(lo.a1, hi.a1) + ' 元'});
+  lines.push({n:'一次性工伤医疗补助金', f:'演示月数，以四川省 / 成都市现行标准校准（' + grades[0] + ' ' + c.medicalSubsidyMonths[grades[0]] + ' 个月 / ' + grades[1] + ' ' + c.medicalSubsidyMonths[grades[1]] + ' 个月）', v:range(lo.a2, hi.a2) + ' 元'});
+  lines.push({n:'一次性伤残就业补助金', f:'演示月数，以四川省 / 成都市现行标准校准（' + grades[0] + ' ' + c.jobSubsidyMonths[grades[0]] + ' 个月 / ' + grades[1] + ' ' + c.jobSubsidyMonths[grades[1]] + ' 个月）', v:range(lo.a3, hi.a3) + ' 元'});
+  lines.push({n:'护理费', f:money(nurseDays) + ' 天 × ' + c.nursingDaily + ' 元/天', v:money(lo.nurse) + ' 元'});
+  lines.push({n:'住院伙食补助费', f:money(nurseDays) + ' 天 × ' + c.foodDaily + ' 元/天', v:money(lo.food) + ' 元'});
+  var low = medical + lo.a1 + lo.a2 + lo.a3 + lo.stopPay + lo.nurse + lo.food;
+  var high = medical + hi.a1 + hi.a2 + hi.a3 + hi.stopPay + hi.nurse + hi.food;
+  lines.push({n:'合计（工伤保险条例待遇项目）', f:v.grade === '未鉴定' ? '按十级至七级区间估算' : '按所选伤残等级估算', v:money(low) + ' — ' + money(high) + ' 元'});
+  return {low:low, high:high, lines:lines};
+}
+function runCalc(){
+  var v = APP.calc;
+  var r;
+  if(v.mode === 'wage'){
+    r = calcWage(v, v.relation);
+  } else {
+    r = v.relation === '劳动' ? calcInjuryWork(v) : calcInjuryService(v);
+  }
+  r.relation = v.relation;
+  r.mode = v.mode;
+  APP.calcResult = r;
+  render();
+  document.getElementById('view').scrollTop = 0;
+}
+
+/* ============================================================
+   六·补 文书生成：三份模板，按当前诊断结果自动选择
+   （案件事实 / 主张金额 / 证据清单由诊断与测算结果自动带入）
+   ============================================================ */
+function pickTemplate(){
+  var a = APP.answers;
+  var rel = relationOf(a.pension);
+  var tp = a.type || 'other';
+  if(rel === '劳动' && (tp === 'wage' || tp === 'overtime' || tp === 'dismiss')){
+    return {id:'arbitration', name:'劳动仲裁申请书（劳动关系）'};
+  }
+  if(rel === '劳动' && tp === 'injury'){
+    return {id:'injuryForm', name:'工伤认定申请表（劳动关系）'};
+  }
+  if(rel === '劳务' && tp === 'injury'){
+    return {id:'complaint', name:'民事起诉状（提供劳务者受害责任纠纷）'};
+  }
+  if(rel === '劳务' && (tp === 'wage' || tp === 'overtime' || tp === 'dismiss')){
+    return {id:'wageSuit', name:'民事起诉状（劳务报酬纠纷）'};
+  }
+  var reason;
+  if(rel === '待核'){ reason = t('docNoReason1'); }
+  else if(tp === 'wage' || tp === 'overtime' || tp === 'dismiss'){ reason = t('docNoReason2'); }
+  else { reason = t('docNoReason3'); }
+  return {id:null, name:null, reason:reason};
+}
+function currentCalcResult(){
+  if(APP.calcResult) return APP.calcResult;
+  var v = APP.calc;
+  try{
+    if(v.mode === 'wage') return calcWage(v, v.relation);
+    return v.relation === '劳动' ? calcInjuryWork(v) : calcInjuryService(v);
+  }catch(err){ return null; }
+}
+function factSummary(){
+  var a = APP.answers;
+  var d = diagnose();
+  var tp = ISSUE_TYPES.filter(function(x){ return x.id === a.type; })[0];
+  var pension = a.pension === '已经领了' ? '已领取养老金/退休金'
+    : a.pension === '还没领' ? '尚未领取养老金/退休金' : '养老金/退休金领取情况待核实';
+  var contract = a.contract === '有书面合同' ? '书面合同用工'
+    : a.contract === '没有，只是口头说' ? '口头约定用工，未签订书面合同' : '用工合同情况待核实';
+  return '当事人' + (a.age || '____') + '，' + pension + '；用工形式为' + contract +
+    '；工伤保险缴纳情况：' + (a.insurance || '____') + '。事发时间：' + (a.duration || '____') + '。' +
+    '反映事项：' + (tp ? tp.label : '超龄用工问题') + '。初步定性：' + t(d.verdictKey) + '。';
+}
+function evidenceLines(){
+  var e = diagnose().evidence;
+  return e.must.concat(e.support, e.alt).map(function(x, i){
+    return (i + 1) + '. ' + x;
+  }).join('\n');
+}
+function amountText(r){
+  if(r && num(r.low) > 0){
+    return '演示测算区间 ' + money(r.low) + ' — ' + money(r.high) + ' 元（以「算一算赔偿」页逐行过程为准；' + DISCLAIMER + '）';
+  }
+  return '____（可先到「算一算赔偿」页测算后填写）';
+}
+function buildDoc(){
+  var pick = pickTemplate();
+  if(!pick.id) return {name:null, reason:pick.reason};
+  var a = APP.answers;
+  var facts = factSummary();
+  var evi = evidenceLines();
+  var end = '────────────────────────\n' + t('docDocEnd');
+  var text = '';
+  if(pick.id === 'arbitration'){
+    var r = calcWage(APP.calc, '劳动');
+    var req = a.type === 'overtime'
+      ? '1. 裁决被申请人支付拖欠申请人的加班工资 ____ 元；\n2. 裁决被申请人按《劳动合同法》第八十五条支付加付赔偿金（如经责令支付后仍不支付）。'
+      : a.type === 'dismiss'
+        ? '1. 裁决被申请人支付拖欠申请人的工资 ____ 元；\n2. 裁决被申请人支付经济补偿 ____ 元。'
+        : '1. 裁决被申请人支付拖欠申请人的工资 ____ 元；\n2. 裁决被申请人按《劳动合同法》第八十五条支付加付赔偿金（如经责令支付后仍不支付）。';
+    text = '劳动仲裁申请书（演示模板）\n\n' +
+      '申请人：____（姓名）　　联系电话：____\n' +
+      '身份证号：____\n' +
+      '被申请人：____（用工单位全称）　　住所地：____\n' +
+      '统一社会信用代码（如不清楚可不填）：____\n\n' +
+      '一、请求事项\n' + req + '\n\n' +
+      '二、事实与理由\n' + facts + '\n' +
+      '申请人于____年____月经人介绍到被申请人处从事____工作，双方约定____。上述款项经申请人多次催要，被申请人至今未支付。\n\n' +
+      '三、请求金额\n' + amountText(r) + '\n\n' +
+      '四、证据材料清单\n' + evi + '\n\n' +
+      '此致\n____劳动人事争议仲裁委员会\n\n' +
+      '申请人（签名并按手印）：____\n____年____月____日\n\n' +
+      '附：1. 本申请书副本 ____ 份；2. 申请人身份证复印件 1 份；3. 证据材料 ____ 份。\n\n' + end;
+  } else if(pick.id === 'injuryForm'){
+    var rw = currentCalcResult();
+    text = '工伤认定申请表（演示模板）\n\n' +
+      '受伤职工姓名：____　　联系电话：____\n' +
+      '身份证号：____\n' +
+      '用工单位名称：____　　住所地：____\n' +
+      '是否已参加工伤保险：' + (a.insurance || '____') + '\n\n' +
+      '一、事故情况\n' +
+      '事故发生时间：____年____月____日____时左右\n' +
+      '事故发生地点：____（工作场所内 / 因工外出）\n' +
+      '受伤害部位：____\n' +
+      '医疗机构及初步诊断：____\n\n' +
+      '二、事故经过简述\n' + facts + '\n\n' +
+      '三、主张的工伤待遇（演示测算）\n' + amountText(rw) + '\n\n' +
+      '四、随附证据材料清单\n' + evi + '\n\n' +
+      '申请人（职工本人或近亲属，签名）：____\n' +
+      '与受伤职工关系：____\n____年____月____日\n\n' +
+      '填表说明：用人单位应在事故发生之日起30日内申报工伤；单位未申报的，职工本人或近亲属可在1年内向当地人力资源社会保障部门申请。\n\n' + end;
+  } else if(pick.id === 'wageSuit'){
+    var rw2 = calcWage(APP.calc, '劳务');
+    text = '民事起诉状（演示模板）\n案由：劳务报酬纠纷\n\n' +
+      '原告：____（姓名）　　联系电话：____\n' +
+      '身份证号：____　　住址：____\n' +
+      '被告：____（用工方名称）　　住址 / 经营场所：____\n\n' +
+      '一、诉讼请求\n' +
+      '1. 判令被告支付拖欠原告的劳务报酬共计 ____ 元（' + amountText(rw2) + '）；\n' +
+      '2. 本案诉讼费用由被告承担。\n\n' +
+      '二、事实与理由\n' + facts + '\n' +
+      '原告为被告提供劳务，双方就报酬已有约定；原告完成约定工作后，被告至今未付清报酬。依据《中华人民共和国民法典》第五百零九条，当事人应当按照约定全面履行义务，被告应支付拖欠的劳务报酬。\n\n' +
+      '三、证据材料清单\n' + evi + '\n\n' +
+      '此致\n____人民法院\n\n' +
+      '具状人（签名并按手印）：____\n____年____月____日\n\n' +
+      '附：本起诉状副本 ____ 份；证据材料 ____ 份。\n\n' + end;
+  } else {
+    var rs = currentCalcResult();
+    text = '民事起诉状（演示模板）\n案由：提供劳务者受害责任纠纷\n\n' +
+      '原告：____（姓名）　　联系电话：____\n' +
+      '身份证号：____　　住址：____\n' +
+      '被告：____（用工方名称）　　住址 / 经营场所：____\n\n' +
+      '一、诉讼请求\n' +
+      '1. 判令被告赔偿原告医疗费、误工费、护理费、住院伙食补助费、营养费、交通费等各项损失共计 ____ 元（' + amountText(rs) + '）；\n' +
+      '2. 本案诉讼费用由被告承担。\n\n' +
+      '二、事实与理由\n' + facts + '\n' +
+      '原告在为被告提供劳务过程中受伤。依据《中华人民共和国民法典》第一千一百九十二条、第一千一百七十九条，被告应按过错承担相应赔偿责任。\n\n' +
+      '三、证据材料清单\n' + evi + '\n\n' +
+      '此致\n____人民法院\n\n' +
+      '具状人（签名并按手印）：____\n____年____月____日\n\n' +
+      '附：本起诉状副本 ____ 份；证据材料 ____ 份。\n\n' + end;
+  }
+  return {name:pick.name, text:text};
+}
+function copyDoc(){
+  var d = buildDoc();
+  if(!d.name){ toast(d.reason); return; }
+  function fallback(){
+    var ta = document.createElement('textarea');
+    ta.value = d.text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy'); toast(t('docCopied')); }
+    catch(err){ toast(t('docCopyFail')); }
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(d.text).then(function(){ toast(t('docCopied')); }, fallback);
+  } else { fallback(); }
+}
+function downloadDoc(){
+  var d = buildDoc();
+  if(!d.name){ toast(d.reason); return; }
+  var blob = new Blob([d.text], {type:'text/plain;charset=utf-8'});
+  var url = URL.createObjectURL(blob);
+  var aEl = document.createElement('a');
+  aEl.href = url;
+  aEl.download = d.name.replace(/[（(].*$/, '') + '（演示）.txt';
+  document.body.appendChild(aEl);
+  aEl.click();
+  document.body.removeChild(aEl);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  toast(t('docSaved'));
+}
+
+/* ============================================================
+   七、页面渲染
+   ============================================================ */
+function renderTop(){
+  var showBack = APP.screen !== 'onboard' && APP.screen !== 'home' && APP.stack.length > 0;
+  var titles = {
+    onboard:'欢迎', home:'“劳”有所依', type:t('typeTitle'), quiz:t('quizTitle'),
+    result:'诊断结果', calc:t('calcTitle'), help:t('helpTitle'), mine:t('mineTitle')
+  };
+  document.getElementById('topbar').innerHTML =
+    (showBack ? '<button class="tb-back" data-act="back">' + esc(t('back')) + '</button>' : '') +
+    '<div class="tb-title">' + esc(titles[APP.screen] || '“劳”有所依') + '</div>' +
+    '<div class="tb-tools">' +
+      '<button class="tool" data-act="font" title="字体大小">字</button>' +
+      '<button class="tool' + (APP.voice ? ' on' : '') + '" data-act="voice" title="语音播报">读</button>' +
+    '</div>';
+}
+function renderTabs(){
+  var tabs = [
+    {id:'home', icon:'家', label:'首页'},
+    {id:'type', icon:'办', label:'办事'},
+    {id:'help', icon:'助', label:'求助'},
+    {id:'mine', icon:'我', label:'我的'}
+  ];
+  document.getElementById('tabbar').innerHTML = tabs.map(function(x){
+    return '<button class="tab' + (APP.screen === x.id ? ' active' : '') + '" data-act="tab" data-v="' + x.id + '">' +
+      '<i>' + x.icon + '</i>' + x.label + '</button>';
+  }).join('');
+}
+function speakScreen(){
+  if(!APP.voice) return;
+  var v = document.getElementById('view');
+  var heading = v.querySelector('.h1, .h2, .verdict');
+  var text = heading ? heading.textContent : '';
+  if(text){ toast('正在朗读：' + text.slice(0, 22)); }
+}
+
+function viewOnboard(){
+  var slides = [
+    {mark:'劳', t:t('ob1t'), d:t('ob1d')},
+    {mark:'问', t:t('ob2t'), d:t('ob2d')},
+    {mark:'依', t:t('ob3t'), d:t('ob3d')}
+  ];
+  var s = slides[APP.slide];
+  return '<div class="slide">' +
+    '<div class="mark ethnic">' + s.mark + '</div>' +
+    '<div class="h1 ethnic">' + esc(s.t) + '</div>' +
+    '<div class="p ethnic">' + esc(s.d) + '</div>' +
+    '<div class="dots">' + slides.map(function(_, i){
+      return '<span class="dot' + (i === APP.slide ? ' on' : '') + '"></span>';
+    }).join('') + '</div>' +
+    '<div class="btnrow" style="width:100%">' +
+      '<button class="btn" data-act="skip">' + esc(t('skip')) + '</button>' +
+      '<button class="btn primary" data-act="obnext">' + esc(APP.slide === 2 ? t('startUse') : t('next')) + '</button>' +
+    '</div>' +
+    '<div class="note blue" style="width:100%;margin-top:1rem">' + esc(t('bilingualNote')) + '</div>' +
+  '</div>';
+}
+function viewHome(){
+  return '<div class="h1 ethnic">' + esc(t('homeHello')) + '</div>' +
+    '<div class="p">' + esc(t('bilingualNote')) + '</div>' +
+    '<button class="bigbtn" data-act="start"><span class="bi">查</span><span class="bt">' + esc(t('startCheck')) + '<span class="bs">' + esc(t('startCheckSub')) + '</span></span></button>' +
+    '<button class="bigbtn ghost" data-act="demos"><span class="bi">例</span><span class="bt">' + esc(t('demoCase')) + '<span class="bs">' + esc(t('demoCaseSub')) + '</span></span></button>' +
+    '<button class="bigbtn ghost" data-act="tocalc"><span class="bi">算</span><span class="bt">' + esc(t('calcEntry')) + '<span class="bs">' + esc(t('calcEntrySub')) + '</span></span></button>' +
+    '<button class="bigbtn ghost" data-act="tab" data-v="help"><span class="bi">援</span><span class="bt">' + esc(t('helpEntry')) + '<span class="bs">' + esc(t('helpEntrySub')) + '</span></span></button>' +
+    '<div class="note">' + esc(t('homeFoot')) + '</div>';
+}
+function viewType(){
+  return '<div class="h1 ethnic">' + esc(t('typeTitle')) + '</div>' +
+    '<div class="p">' + esc(t('typeTip')) + '</div>' +
+    ISSUE_TYPES.map(function(x){
+      return '<button class="opt" data-act="picktype" data-v="' + x.id + '">' +
+        '<span class="tag">' + x.mark + '</span>' +
+        '<span style="flex:1"><b>' + esc(x.label) + '</b><br><small style="color:var(--muted)">' + esc(x.desc) + '</small></span>' +
+        '</button>';
+    }).join('');
+}
+function viewQuiz(){
+  var q = QUESTIONS[APP.qIndex];
+  var chosen = APP.answers[q.id];
+  return '<div class="qnum">' + esc('第 ' + (APP.qIndex + 1) + ' 题 / 共 ' + QUESTIONS.length + ' 题') + '</div>' +
+    '<div class="h2 ethnic">' + esc(q.q) + '</div>' +
+    '<div class="p">' + esc(t('quizTip')) + '</div>' +
+    q.opts.map(function(o){
+      return '<button class="opt' + (chosen === o ? ' sel' : '') + '" data-act="pickopt" data-v="' + esc(o) + '">' + esc(o) + '</button>';
+    }).join('') +
+    '<div class="btnrow">' +
+      '<button class="btn" data-act="qprev">' + esc(t('prev')) + '</button>' +
+      (APP.qIndex === QUESTIONS.length - 1
+        ? '<button class="btn primary" data-act="finish">' + esc(t('seeResult')) + '</button>'
+        : '<button class="btn primary" data-act="qnext">' + esc(t('next')) + '</button>') +
+    '</div>';
+}
+function viewResult(){
+  var d = diagnose();
+  var relTag = d.relation === '劳务' ? '按劳务关系处理' : d.relation === '劳动' ? '可按劳动关系主张' : '两种关系都需准备';
+  return '<div class="p">' + esc(t('resultTitle')) + '</div>' +
+    '<div class="verdict ethnic" id="verdictText">' + esc(t(d.verdictKey)) + '</div>' +
+    '<div class="note blue"><span class="tag">' + esc(t('relationLabel')) + '</span>' + esc(relTag) + '</div>' +
+    '<div class="note">' + esc(t('bilingualNote')) + '</div>' +
+    '<button class="layer" data-act="showlaw">' + esc(t('layerLaw')) + '<span class="ar">›</span></button>' +
+    '<button class="layer" data-act="showevi">' + esc(t('layerEvidence')) + '<span class="ar">›</span></button>' +
+    '<button class="layer" data-act="showpath">' + esc(t('layerPath')) + '<span class="ar">›</span></button>' +
+    '<button class="layer" data-act="tocalc">' + esc(t('layerCalc')) + '<span class="ar">›</span></button>' +
+    '<button class="layer" data-act="todoc">' + esc(t('docBtn')) + '<span class="ar">›</span></button>' +
+    '<button class="btn" style="width:100%;margin-top:.6rem" data-act="backhome">' + esc(t('backHome')) + '</button>';
+}
+function viewLaw(){
+  var d = diagnose();
+  return '<div class="h2">' + esc(t('lawTitle')) + '</div>' +
+    d.law.map(function(x){
+      return '<div class="lawitem">' +
+        '<div class="lawname">' + esc(x.name) + '</div>' +
+        '<div class="lawdate">' + esc(x.date) + '</div>' +
+        '<div class="lawplain">' + esc(x.plain) + '</div>' +
+      '</div>';
+    }).join('') +
+    '<div class="note">' + esc(t('bilingualNote')) + '</div>';
+}
+function viewEvidence(){
+  var d = diagnose();
+  var e = d.evidence;
+  function group(title, arr, key){
+    return '<div class="h2" style="font-size:1rem;margin-top:.8rem">' + esc(title) + '</div>' +
+      arr.map(function(item, i){
+        var id = key + '_' + i;
+        var done = !!APP.checked[id];
+        return '<label class="ck' + (done ? ' done' : '') + '">' +
+          '<input type="checkbox" data-act="check" data-v="' + id + '"' + (done ? ' checked' : '') + '>' +
+          '<span>' + esc(item) + '</span></label>';
+      }).join('');
+  }
+  return '<div class="h2">' + esc(t('evidenceTitle')) + '</div>' +
+    group(t('mustLabel'), e.must, 'must') +
+    group(t('supportLabel'), e.support, 'support') +
+    group(t('altLabel'), e.alt, 'alt') +
+    '<div class="note green">' + esc(t('bilingualNote')) + '</div>';
+}
+function viewPath(){
+  var d = diagnose();
+  return '<div class="h2">' + esc(t('pathTitle')) + '</div>' +
+    d.path.map(function(s){
+      return '<div class="step"><b>' + esc(s.t) + '</b><span>' + esc(s.d) + '</span><br><span>' + esc(s.w) + '</span></div>';
+    }).join('') +
+    '<button class="bigbtn warm" data-act="tocalc"><span class="bi">算</span><span class="bt">' + esc(t('layerCalc')) + '</span></button>' +
+    '<button class="btn primary" style="width:100%" data-act="todoc">' + esc(t('docBtn')) + '</button>';
+}
+function viewCalc(){
+  var v = APP.calc;
+  var wageForm =
+    '<div class="field"><label>每月工资（元）</label><input type="number" inputmode="numeric" data-act="calcfield" data-v="wage" value="' + esc(v.wage) + '"></div>' +
+    '<div class="field"><label>欠了几个月（月）</label><input type="number" inputmode="numeric" data-act="calcfield" data-v="arrearsMonths" value="' + esc(v.arrearsMonths) + '"></div>';
+  var injuryForm =
+    '<div class="field"><label>医疗费票据金额（元）</label><input type="number" inputmode="numeric" data-act="calcfield" data-v="medical" value="' + esc(v.medical) + '"></div>' +
+    (v.relation === '劳动'
+      ? '<div class="field"><label>停工留薪期（月）</label><input type="number" inputmode="numeric" data-act="calcfield" data-v="months" value="' + esc(v.months) + '"></div>'
+      : '<div class="field"><label>误工天数（天）</label><input type="number" inputmode="numeric" data-act="calcfield" data-v="days" value="' + esc(v.days) + '"></div>') +
+    '<div class="field"><label>护理天数（天）</label><input type="number" inputmode="numeric" data-act="calcfield" data-v="nurse" value="' + esc(v.nurse) + '"></div>' +
+    '<div class="field"><label>月工资（元）</label><input type="number" inputmode="numeric" data-act="calcfield" data-v="wage" value="' + esc(v.wage) + '"></div>' +
+    '<div class="field"><label>伤残等级</label><select data-act="calcfield" data-v="grade">' +
+      ['未鉴定','七级','八级','九级','十级'].map(function(g){
+        return '<option' + (v.grade === g ? ' selected' : '') + '>' + g + '</option>';
+      }).join('') + '</select></div>';
+
+  var resultHtml = '';
+  if(APP.calcResult){
+    var r = APP.calcResult;
+    resultHtml =
+      '<div class="card">' +
+        '<div class="h2" style="font-size:1rem">' + esc(t('calcRange')) + '</div>' +
+        '<div class="result-money">¥ ' + money(r.low) + ' — ' + money(r.high) + '</div>' +
+        '<details open><summary>' + esc(t('calcDetail')) + '</summary>' +
+          '<div style="font-size:.8rem;color:var(--muted);margin:.3rem 0">' + esc(CONFIG.calibration) + '</div>' +
+          r.lines.map(function(l){
+            return '<div class="calcline"><div class="cl-n">' + esc(l.n) + '<span class="cl-f">' + esc(l.f) + '</span></div><div class="cl-v">' + esc(l.v) + '</div></div>';
+          }).join('') +
+        '</details>' +
+        '<div class="note">' + esc(DISCLAIMER) + '</div>' +
+        '<button class="btn" style="width:100%" data-act="again">' + esc(t('again')) + '</button>' +
+      '</div>';
+  }
+
+  return '<div class="h1" style="font-size:1.25rem">' + esc(t('calcTitle')) + '</div>' +
+    '<div class="p">' + esc(t('calcTip')) + '</div>' +
+    '<div class="note blue">' + esc(t('calcRuleNote')) + '</div>' +
+    '<div class="seg">' +
+      '<button class="' + (v.mode === 'wage' ? 'active' : '') + '" data-act="calcmode" data-v="wage">' + esc(t('modeWage')) + '</button>' +
+      '<button class="' + (v.mode === 'injury' ? 'active' : '') + '" data-act="calcmode" data-v="injury">' + esc(t('modeInjury')) + '</button>' +
+    '</div>' +
+    '<div class="seg">' +
+      '<button class="' + (v.relation === '劳务' ? 'active' : '') + '" data-act="calcrel" data-v="劳务">' + esc(t('relLabor')) + '</button>' +
+      '<button class="' + (v.relation === '劳动' ? 'active' : '') + '" data-act="calcrel" data-v="劳动">' + esc(t('relWork')) + '</button>' +
+    '</div>' +
+    '<div class="card">' + (v.mode === 'wage' ? wageForm : injuryForm) +
+      '<button class="btn primary" style="width:100%" data-act="runcalc">' + esc(t('calcBtn')) + '</button>' +
+    '</div>' + resultHtml +
+    '<div class="note">' + esc(t('bilingualNote')) + '</div>';
+}
+function viewHelp(){
+  return '<div class="h1" style="font-size:1.25rem">' + esc(t('helpTitle')) + '</div>' +
+    '<div class="card">' +
+      '<div class="h2">' + esc(t('help12348')) + '</div>' +
+      '<div class="result-money" style="color:var(--blue)">12348</div>' +
+      '<button class="bigbtn warm" data-act="nodial"><span class="bi">拨</span><span class="bt">模拟拨打<span class="bs">' + esc(t('noDial')) + '</span></span></button>' +
+    '</div>' +
+    '<div class="note blue">' + esc(t('helpTip')) + '</div>' +
+    '<button class="btn primary" style="width:100%" data-act="todoc">' + esc(t('docBtn')) + '</button>';
+}
+function viewMine(){
+  var fonts = [
+    {v:1, label:t('font1')}, {v:2, label:t('font2')}, {v:3, label:t('font3')}
+  ];
+  return '<div class="h1" style="font-size:1.25rem">' + esc(t('mineTitle')) + '</div>' +
+    '<div class="card"><div class="h2" style="font-size:1rem">' + esc(t('fontLabel')) + '</div>' +
+      '<div class="chips">' + fonts.map(function(x){
+        return '<button class="chip' + (APP.fontLevel === x.v ? ' active' : '') + '" data-act="setfont" data-v="' + x.v + '">' + esc(x.label) + '</button>';
+      }).join('') + '</div>' +
+    '</div>' +
+    '<div class="card"><div class="h2" style="font-size:1rem">' + esc(t('demoLabel')) + '</div>' +
+      DEMO_CASES.map(function(c){
+        return '<button class="opt" data-act="loadcase" data-v="' + c.id + '">' + esc(c.title) + '</button>';
+      }).join('') +
+    '</div>' +
+    '<div class="card"><div class="h2" style="font-size:1rem">' + esc(t('disclaimerLabel')) + '</div>' +
+      '<div class="p">' + esc(DISCLAIMER) + '</div>' +
+      '<div class="h2" style="font-size:1rem;margin-top:.6rem">' + esc(t('about')) + '</div>' +
+      '<div class="p">' + esc(t('aboutText')) + '</div>' +
+    '</div>';
+}
+function viewCases(){
+  return '<div class="h1" style="font-size:1.25rem">' + esc(t('demoLabel')) + '</div>' +
+    '<div class="p">' + esc(t('bilingualNote')) + '</div>' +
+    DEMO_CASES.map(function(c){
+      return '<button class="bigbtn ghost" data-act="loadcase" data-v="' + c.id + '">' +
+        '<span class="bi">' + c.id + '</span><span class="bt">' + esc(c.title) + '<span class="bs">点一下直接看诊断结果</span></span>' +
+      '</button>';
+    }).join('') +
+    '<button class="btn" style="width:100%" data-act="backhome">' + esc(t('backHome')) + '</button>';
+}
+
+function viewDoc(){
+  var d = buildDoc();
+  if(!d.name){
+    return '<div class="h1" style="font-size:1.25rem">' + esc(t('docTitle')) + '</div>' +
+      '<div class="note">' + esc(d.reason) + '</div>' +
+      '<button class="btn" style="width:100%" data-act="backhome">' + esc(t('backHome')) + '</button>';
+  }
+  return '<div class="h1" style="font-size:1.25rem">' + esc(t('docTitle')) + '</div>' +
+    '<div class="p">' + esc(t('docTip')) + '</div>' +
+    '<div class="note blue"><span class="tag">' + esc(t('docTplLabel')) + '</span>' + esc(d.name) + '</div>' +
+    '<div class="card doctext" id="docText">' + esc(d.text) + '</div>' +
+    '<div class="btnrow">' +
+      '<button class="btn primary" style="flex:1" data-act="copydoc">' + esc(t('docCopy')) + '</button>' +
+      '<button class="btn" style="flex:1" data-act="downloaddoc">' + esc(t('docDownload')) + '</button>' +
+    '</div>' +
+    '<div class="note">' + esc(t('bilingualNote')) + '</div>';
+}
+
+var VIEWS = {
+  onboard:viewOnboard, home:viewHome, type:viewType, quiz:viewQuiz,
+  result:viewResult, law:viewLaw, evidence:viewEvidence, path:viewPath,
+  calc:viewCalc, help:viewHelp, mine:viewMine, cases:viewCases, doc:viewDoc
+};
+function titlesFor(screen){
+  var map = {
+    onboard:'欢迎', home:'“劳”有所依', type:t('typeTitle'), quiz:t('quizTitle'),
+    result:'诊断结果', law:t('lawTitle'), evidence:t('evidenceTitle'), path:t('pathTitle'),
+    calc:t('calcTitle'), help:t('helpTitle'), mine:t('mineTitle'), cases:t('demoLabel'),
+    doc:t('docTitle')
+  };
+  return map[screen] || '“劳”有所依';
+}
+function render(){
+  applyFont();
+  var showBack = !['onboard','home'].includes(APP.screen) && APP.stack.length > 0;
+  document.getElementById('topbar').innerHTML =
+    (showBack ? '<button class="tb-back" data-act="back">' + esc(t('back')) + '</button>' : '') +
+    '<div class="tb-title">' + esc(titlesFor(APP.screen)) + '</div>' +
+    '<div class="tb-tools">' +
+      '<button class="tool" data-act="font" title="字体大小">字</button>' +
+      '<button class="tool' + (APP.voice ? ' on' : '') + '" data-act="voice" title="语音播报">读</button>' +
+    '</div>';
+  renderTabs();
+  document.getElementById('view').innerHTML = (VIEWS[APP.screen] || viewHome)();
+}
+
+/* ============================================================
+   八、事件处理
+   ============================================================ */
+function loadCase(id){
+  var c = DEMO_CASES.filter(function(x){ return x.id === id; })[0];
+  if(!c) return;
+  APP.currentCase = c.id;
+  APP.answers = {type:c.type};
+  Object.keys(c.answers).forEach(function(k){ APP.answers[k] = c.answers[k]; });
+  APP.calc = JSON.parse(JSON.stringify(c.calc));
+  APP.calcResult = null;
+  go('result');
+}
+document.addEventListener('click', function(e){
+  var el = e.target.closest('[data-act]');
+  if(!el) return;
+  var act = el.getAttribute('data-act');
+  var val = el.getAttribute('data-v');
+  switch(act){
+    case 'back': back(); break;
+    case 'obnext':
+      if(APP.slide < 2){ APP.slide++; render(); }
+      else { APP.slide = 0; go('home'); }
+      break;
+    case 'skip': APP.slide = 0; go('home'); break;
+    case 'tab':
+      if(val === APP.screen) break;
+      if(val === 'type'){ APP.stack = []; go('type'); }
+      else { go(val); }
+      break;
+    case 'start': APP.stack = []; go('type'); break;
+    case 'demos': go('cases'); break;
+    case 'tocalc':
+      APP.calcResult = null;
+      if(!APP.answers.pension){ APP.calc.relation = '劳务'; }
+      else { APP.calc.relation = APP.answers.pension === '还没领' ? '劳动' : APP.answers.pension === '已经领了' ? '劳务' : '劳务'; }
+      APP.calc.mode = (APP.answers.type === 'wage' || APP.answers.type === 'overtime') ? 'wage' : 'injury';
+      go('calc');
+      break;
+    case 'picktype':
+      APP.answers.type = val;
+      APP.qIndex = 0;
+      go('quiz');
+      break;
+    case 'pickopt':
+      APP.answers[QUESTIONS[APP.qIndex].id] = val;
+      render();
+      break;
+    case 'qnext':
+      if(!APP.answers[QUESTIONS[APP.qIndex].id]){ toast('请先选一个答案'); break; }
+      APP.qIndex = Math.min(APP.qIndex + 1, QUESTIONS.length - 1);
+      render();
+      break;
+    case 'qprev':
+      APP.qIndex = Math.max(APP.qIndex - 1, 0);
+      render();
+      break;
+    case 'finish':
+      if(!APP.answers[QUESTIONS[APP.qIndex].id]){ toast('请先选一个答案'); break; }
+      go('result');
+      break;
+    case 'showlaw': go('law'); break;
+    case 'showevi': go('evidence'); break;
+    case 'showpath': go('path'); break;
+    case 'backhome': APP.stack = []; go('home'); break;
+    case 'check': APP.checked[val] = el.checked; render(); break;
+    case 'font':
+      APP.fontLevel = APP.fontLevel === 3 ? 1 : APP.fontLevel + 1;
+      render();
+      break;
+    case 'setfont': APP.fontLevel = parseInt(val, 10); render(); break;
+    case 'voice':
+      APP.voice = !APP.voice;
+      render();
+      if(APP.voice) speakScreen(); else toast('已关闭语音播报');
+      break;
+    case 'calcmode': APP.calc.mode = val; APP.calcResult = null; render(); break;
+    case 'calcrel': APP.calc.relation = val; APP.calcResult = null; render(); break;
+    case 'runcalc': runCalc(); break;
+    case 'again': APP.calcResult = null; render(); break;
+    case 'nodial': toast('演示原型，不实际拨号'); break;
+    case 'loadcase': loadCase(val); break;
+    case 'todoc': go('doc'); break;
+    case 'copydoc': copyDoc(); break;
+    case 'downloaddoc': downloadDoc(); break;
+  }
+});
+document.addEventListener('change', function(e){
+  var el = e.target.closest('[data-act]');
+  if(!el) return;
+  if(el.getAttribute('data-act') === 'calcfield'){
+    APP.calc[el.getAttribute('data-v')] = el.value;
+  }
+});
+
+render();
+</script>
+</body>
+</html>
